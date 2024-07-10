@@ -12,7 +12,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.study.event.api.event.entity.QEvent.*;
+import static com.study.event.api.event.entity.QEvent.event;
+
 
 @Repository
 @RequiredArgsConstructor
