@@ -14,7 +14,6 @@ import java.util.Map;
 @RequestMapping("/events")
 @RequiredArgsConstructor
 @Slf4j
-@CrossOrigin
 public class EventController {
 
     private final EventService eventService;
@@ -22,8 +21,8 @@ public class EventController {
     // 전체 조회 요청
     @GetMapping("/page/{pageNo}")
     public ResponseEntity<?> getList(
-             @RequestParam(required = false) String sort,
-             @PathVariable int pageNo
+            @RequestParam(required = false) String sort,
+            @PathVariable int pageNo
     ) throws InterruptedException {
 
         if (sort == null) {

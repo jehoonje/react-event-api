@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 @Slf4j
 @RequiredArgsConstructor
+
 public class EventUserController {
 
     private final EventUserService eventUserService;
