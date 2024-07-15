@@ -42,6 +42,7 @@ public class EventUserService {
     // 토큰 생성 객체
     private final TokenProvider tokenProvider;
 
+
     // 이메일 중복확인 처리
     public boolean checkEmailDuplicate(String email) {
 
@@ -239,7 +240,7 @@ public class EventUserService {
         return LoginResponseDto.builder()
                 .email(eventUser.getEmail())
                 .role(eventUser.getRole().toString())
-                .token("")
+                .token(token)
                 .build();
 
     }

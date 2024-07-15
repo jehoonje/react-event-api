@@ -8,12 +8,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.SecretKey;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Component
 @Slf4j
@@ -21,8 +21,9 @@ import java.util.Map;
 public class TokenProvider {
 
     // 서명에 사용할 512비트의 랜덤 문자열 비밀키
-    @Value("{jwt.secret}")
+    @Value("${jwt.secret}")
     private String SECRET_KEY;
+
 
     /**
      * JWT를 생성하는 메서드
@@ -30,6 +31,7 @@ public class TokenProvider {
      * @return - 생성된 JWT의 암호화된 문자열
      */
     public String createToken(EventUser eventUser) {
+
         /*
             토큰의 형태
             {
@@ -40,7 +42,6 @@ public class TokenProvider {
                 "email": "로그인한 사람 이메일",
                 "role": "ADMIN"
                 ...
-
                 ===
                 서명
             }
@@ -57,14 +58,14 @@ public class TokenProvider {
                         Keys.hmacShaKeyFor(SECRET_KEY.getBytes())
                         , SignatureAlgorithm.HS512
                 )
-                // payload 에 들어갈 클레임 설정
+                // payload에 들어갈 클레임 설정
                 .setClaims(claims) // 추가 클레임은 항상 가장 먼저 설정
-                .setIssuer("메렁") // 발급자 정보
+                .setIssuer("메롱메롱") // 발급자 정보
                 .setIssuedAt(new Date()) // 발급 시간
                 .setExpiration(Date.from(
                         Instant.now().plus(1, ChronoUnit.DAYS)
                 )) // 토큰 만료 시간
-                .setSubject(eventUser.getId()) // 토큰을 식별할 수 있는 유일한 값
+                .setSubject(eventUser.getId()) // 토큰을 식별할수 있는 유일한 값
                 .compact();
     }
 }
