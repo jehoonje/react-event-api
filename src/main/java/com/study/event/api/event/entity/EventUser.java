@@ -40,6 +40,7 @@ public class EventUser {
 
     private LocalDateTime createAt; // 회원가입 시간
 
+
     @OneToMany(mappedBy = "eventUser", orphanRemoval = true, cascade = CascadeType.ALL)
     @Builder.Default
     private List<Event> eventList = new ArrayList<>();
